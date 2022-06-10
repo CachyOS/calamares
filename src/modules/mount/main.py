@@ -306,6 +306,9 @@ def mount_partition(root_mount_point, partition, partitions, mount_options, moun
                                         fstype,
                                         mount_option) != 0:
                 libcalamares.utils.warning("Cannot mount {}".format(device))
+    else:
+        if fstype != "zfs":
+            mount_options_list.append({"mountpoint": raw_mount_point, "option_string": mount_options_string})
 
 
 def run():
