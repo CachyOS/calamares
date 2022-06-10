@@ -1,0 +1,5 @@
+---
+type:       "job"
+name:       "grubconf"
+interface:  "python"
+script:     "main.py"

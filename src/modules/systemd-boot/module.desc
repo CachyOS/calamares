@@ -1,0 +1,5 @@
+---
+type:       "job"
+name:       "systemd-boot"
+interface:  "python"
+script:     "main.py"

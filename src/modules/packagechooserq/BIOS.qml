@@ -14,22 +14,18 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.3
 
-Item {
-    width:  parent.width
-    height: parent.height
-
-    Rectangle {
-        anchors.fill: parent
-        color: "#f2f2f2"
-
-        ButtonGroup {
-            id: switchGroup
-        }
-
         Column {
             id: column
             anchors.centerIn: parent
             spacing: 5
+
+            ButtonGroup {
+                id: switchGroup
+            }
+
+            Component.onCompleted: {
+                config.packageChoice = "grub"
+            }
 
             Rectangle {
                 //id: rectangle
@@ -42,8 +38,7 @@ Item {
                     width: 450
                     height: 104
                     anchors.centerIn: parent
-                    text: qsTr("LibreOffice is a powerful and free office suite, used by millions of people around the world. It includes several applications that make it the most versatile Free and Open Source office suite on the market.<br/>
-                    Default option.")
+                    text: qsTr("GRUB 2, the GRand Unified Bootloader is the reference implementation of the Free Software Foundation's Multiboot Specification, which provides a user the choice to boot one of multiple operating systems installed on a computer.")
                     font.pointSize: 10
                     anchors.verticalCenterOffset: -10
                     anchors.horizontalCenterOffset: 100
@@ -56,7 +51,7 @@ Item {
                     y: 110
                     width: 187
                     height: 14
-                    text: qsTr("LibreOffice")
+                    text: qsTr("GRUB")
                     checked: true
                     hoverEnabled: true
                     ButtonGroup.group: switchGroup
@@ -81,10 +76,10 @@ Item {
 
                     onCheckedChanged: {
                         if ( ! checked ) {
-                            print("L not used")
+                            print("grub not used")
                         }
                         else {
-                            config.packageChoice = "libreoffice"
+                            config.packageChoice = "grub"
                             print( config.packageChoice )
                         }
                     }
@@ -96,75 +91,8 @@ Item {
                     y: 25
                     height: 100
                     fillMode: Image.PreserveAspectFit
-                    source: "images/libreoffice.jpg"
+                    source: "images/grub.png"
                 }
-            }
-
-            Rectangle {
-                width: 700
-                height: 150
-                radius: 10
-                border.width: 0
-                Text {
-                    width: 450
-                    height: 104
-                    anchors.centerIn: parent
-                    text: qsTr("If you don't want to install an office suite, just select No Office Suite. You can always add one (or more) later on your installed system as the need arrives.")
-                    font.pointSize: 10
-                    anchors.verticalCenterOffset: -10
-                    anchors.horizontalCenterOffset: 100
-                    wrapMode: Text.WordWrap
-                }
-
-                Switch {
-                    id: element1
-                    x: 500
-                    y: 110
-                    width: 187
-                    height: 14
-                    text: qsTr("No Office Suite")
-                    checked: false
-                    hoverEnabled: true
-                    ButtonGroup.group: switchGroup
-
-                    indicator: Rectangle {
-                        implicitWidth: 40
-                        implicitHeight: 14
-                        radius: 10
-                        color: element1.checked ? "#3498db" : "#B9B9B9"
-                        border.color: element1.checked ? "#3498db" : "#cccccc"
-
-                        Rectangle {
-                            x: element1.checked ? parent.width - width : 0
-                            y: (parent.height - height) / 2
-                            width: 20
-                            height: 20
-                            radius: 10
-                            color: element1.down ? "#cccccc" : "#ffffff"
-                            border.color: element1.checked ? (element1.down ? "#3498db" : "#3498db") : "#999999"
-                        }
-                    }
-
-                    onCheckedChanged: {
-                        if ( ! checked ) {
-                            print("not used")
-                        }
-                        else {
-                            print("No Office Suite")
-                            config.packageChoice = "no_office_suite"
-                        }
-                    }
-                }
-
-                Image {
-                    id: image
-                    x: 8
-                    y: 25
-                    height: 100
-                    fillMode: Image.PreserveAspectFit
-                    source: "images/no-selection.png"
-                }
-
             }
 
             Rectangle {
@@ -177,7 +105,7 @@ Item {
                     width: 450
                     height: 104
                     anchors.centerIn: parent
-                    text: qsTr("Create a minimal Plasma Desktop install, remove all extra applications and decide later on what you would like to add to your system. Examples of what won't be on such an install, there will be no Office Suite, no media players, no image viewer or print support.  It will be just a desktop, file browser, package manager, text editor and simple web-browser.")
+                    text: qsTr("No bootloader selected. Selecting no bootloader might result in an un-bootable system, if you don't already have a bootloader were you can add this install to.")
                     font.pointSize: 10
                     anchors.verticalCenterOffset: -10
                     anchors.horizontalCenterOffset: 100
@@ -190,7 +118,7 @@ Item {
                     y: 110
                     width: 187
                     height: 14
-                    text: qsTr("Minimal Install")
+                    text: qsTr("No bootloader")
                     checked: false
                     hoverEnabled: true
                     ButtonGroup.group: switchGroup
@@ -215,11 +143,11 @@ Item {
 
                     onCheckedChanged: {
                         if ( ! checked ) {
-                            print("M not used")
+                            print("no btl not checked")
                         }
                         else {
-                            print("minimal")
-                            config.packageChoice = "minimal_install"
+                            print("no bootloader")
+                            config.packageChoice = "no_bootloader"
                         }
                     }
                 }
@@ -230,7 +158,7 @@ Item {
                     y: 25
                     height: 100
                     fillMode: Image.PreserveAspectFit
-                    source: "images/plasma.png"
+                    source: "images/no_grub.png"
                 }
             }
 
@@ -242,12 +170,9 @@ Item {
                 Text {
                     height: 25
                     anchors.centerIn: parent
-                    text: qsTr("Please select an option for your install, or use the default: LibreOffice included.")
+                    text: qsTr("Please select a bootloader option for your install, or leave the default option, <strong>GRUB 2</strong>.")
                     font.pointSize: 10
                     wrapMode: Text.WordWrap
                 }
             }
         }
-    }
-
-}
