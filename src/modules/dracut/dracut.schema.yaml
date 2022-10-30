@@ -6,4 +6,4 @@ $id: https://calamares.io/schemas/dracut
 additionalProperties: false
 type: object
 properties:
-    initramfsName: { type: string }
+    kernelName: { type: string }
